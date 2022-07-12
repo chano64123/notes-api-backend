@@ -1,7 +1,9 @@
 const express = require('express')
 const app = express()
 const loguer = require('./loguerMiddleware')
+const cors = require('./cors')
 
+app.use(cors())
 app.use(express.json())
 
 app.use(loguer)
@@ -83,7 +85,7 @@ app.use((req, res) => {
   res.status(404).json({ error: 'Not found' })
 })
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}/`)
